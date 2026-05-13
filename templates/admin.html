@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Review</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+<body>
+    <main>
+        <h1>Admin Review</h1>
+        <form method="get" action="{{ url_for('admin') }}">
+            <label for="status">Filter status</label>
+            <select id="status" name="status">
+                <option value="">All</option>
+                {% for status in ["pending_review", "available", "reserved", "recycled", "discarded"] %}
+                    <option value="{{ status }}" {% if selected_status == status %}selected{% endif %}>{{ status }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Alias</th>
+                    <th>Type</th>
+                    <th>Size</th>
+                    <th>Wear</th>
+                    <th>Score</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record.id }}</td>
+                        <td>{{ record.child_alias }}</td>
+                        <td>{{ record.uniform_type }}</td>
+                        <td>{{ record.size }}</td>
+                        <td>{{ record.wear_level }}</td>
+                        <td>{{ record.wear_score }}</td>
+                        <td>
+                            <form data-status-form method="post" action="{{ url_for('change_status', record_id=record.id) }}">
+                                <select name="status">
+                                    {% for status in ["pending_review", "available", "reserved", "recycled", "discarded"] %}
+                                        <option value="{{ status }}" {% if record.status == status %}selected{% endif %}>{{ status }}</option>
+                                    {% endfor %}
+                                </select>
+                            </form>
+                        </td>
+                        <td>{{ record.created_at }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">No records yet.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>
