@@ -4,19 +4,51 @@
 
 ## Project Introduction
 
-This project is a Flask + SQLite + OpenCV based prototype for kindergarten uniform recycling management. The user side allows families or staff to submit uniform information with an uploaded image. The system uses OpenCV to make an initial wear-level estimate and stores the result in SQLite. The admin side reads from the database to review records, filter data, and update circulation status.
+This project is a Flask + SQLite + OpenCV + HTML/CSS/JavaScript prototype for kindergarten uniform recycling management. Users can upload a uniform image and submit basic clothing information. The backend uses OpenCV to make an initial wear-level estimate, stores the result, and provides management pages for viewing and updating record status.
 
-The repository is prepared for GitHub version control, team collaboration, and university innovation and entrepreneurship competition demonstrations.
-
-Important privacy rule: do not commit real children's information, real photos, or production databases.
+Important privacy rule: this repository must not contain real children's information, real photos, or production databases.
 
 ## Tech Stack
 
+- Frontend: HTML, CSS, JavaScript
 - Backend: Python, Flask
-- Database: SQLite
 - Image analysis: OpenCV
-- Frontend foundation: HTML, CSS, JavaScript
-- Testing: pytest
+- Data storage: JSON record file and local SQLite database
+
+## Project Structure
+
+```text
+ai-uniform-recycling-system/
+├─ frontend/
+│  ├─ index.html
+│  ├─ style.css
+│  ├─ js/
+│  │  └─ main.js
+│  └─ static/
+│     └─ images/
+│
+├─ backend/
+│  ├─ app.py
+│  ├─ detect.py
+│  ├─ config.py
+│  └─ utils/
+│     └─ tool.py
+│
+├─ data/
+│  ├─ record.json
+│  ├─ database/
+│  └─ save_img/
+│
+├─ manage/
+│  ├─ admin.html
+│  └─ record_list.html
+│
+├─ run.bat
+├─ requirements.txt
+├─ .gitignore
+├─ LICENSE
+└─ README.md
+```
 
 ## Local Setup
 
@@ -33,70 +65,35 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-3. Initialize the database.
+3. Run the project.
 
 ```bash
-python database.py
+run.bat
 ```
 
-4. Run the Flask app.
+Or run Flask directly:
 
 ```bash
-python app.py
+python backend/app.py
 ```
 
-5. Open the app in a browser.
+4. Open the local site.
 
 ```text
 http://127.0.0.1:5000
 ```
 
-## Project Structure
+## Main Features
 
-```text
-ai-uniform-recycling-system/
-├── README.md
-├── requirements.txt
-├── .gitignore
-├── app.py
-├── database.py
-├── wear_detection.py
-├── docs/
-│   ├── project-overview.md
-│   ├── system-logic.md
-│   ├── database-design.md
-│   └── api-document.md
-├── database/
-│   ├── schema.sql
-│   └── sample_data.sql
-├── static/
-│   ├── css/
-│   │   ├── user.css
-│   │   └── admin.css
-│   ├── js/
-│   │   ├── user.js
-│   │   └── admin.js
-│   └── uploads/
-├── templates/
-│   ├── user.html
-│   ├── admin.html
-│   └── login.html
-└── tests/
-    └── test_database.py
-```
+- Upload uniform image and basic clothing information.
+- Use OpenCV for preliminary wear-level judgment.
+- Save submitted records into `data/record.json` and local SQLite storage.
+- Provide management pages for record viewing and status updates.
 
 ## Collaboration Notes
 
-- Keep feature work on branches and open pull requests for review.
-- Keep database schema changes in `database/schema.sql`.
-- Keep sample-only, anonymized test data in `database/sample_data.sql`.
-- Do not commit files under `static/uploads/` except `.gitkeep`.
-- Do not commit local SQLite databases, cache folders, or virtual environments.
-
-## Competition Display Direction
-
-The project can be presented as an AI-assisted circular uniform management system with three core values:
-
-- Environmental protection through uniform reuse.
-- Lightweight AI-assisted wear assessment.
-- Traceable circulation status management for schools.
+- Use branches and pull requests for team development.
+- Keep frontend code under `frontend/`.
+- Keep backend routes and detection logic under `backend/`.
+- Keep only virtual demo data in `data/record.json`.
+- Do not commit real uploaded photos, local database files, cache files, or virtual environments.

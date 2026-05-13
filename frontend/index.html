@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Uniform Recycling Submission</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="page">
+        <section class="panel">
+            <h1>Uniform Recycling Submission</h1>
+            <p>Submit anonymized demo data only. Do not upload real children's information or real photos.</p>
+
+            <form id="uploadForm">
+                <label for="childAlias">Anonymized label</label>
+                <input id="childAlias" name="child_alias" placeholder="Test Child A" required>
+
+                <label for="clothType">Uniform type</label>
+                <input id="clothType" name="cloth_type" placeholder="Summer T-shirt" required>
+
+                <label for="size">Size</label>
+                <input id="size" name="size" placeholder="110" required>
+
+                <label for="image">Uniform image</label>
+                <input id="image" name="image" type="file" accept="image/*" required>
+
+                <label for="note">Notes</label>
+                <textarea id="note" name="note" rows="4"></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+
+            <p id="result" class="result"></p>
+            <a href="/manage/records">Open management records</a>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+</html>

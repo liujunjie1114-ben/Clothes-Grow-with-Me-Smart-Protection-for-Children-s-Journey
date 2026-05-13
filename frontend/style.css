@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #1f2937;
+    background: #f6f7f9;
+}
+
+.page {
+    max-width: 780px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.panel {
+    background: #ffffff;
+    border: 1px solid #d8dee6;
+    border-radius: 8px;
+    padding: 28px;
+}
+
+label {
+    display: block;
+    margin: 16px 0 6px;
+    font-weight: 700;
+}
+
+input,
+textarea,
+button {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 460px;
+    padding: 10px;
+    font: inherit;
+}
+
+button {
+    margin-top: 18px;
+    color: #ffffff;
+    background: #238636;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.result {
+    min-height: 24px;
+    color: #0969da;
+}

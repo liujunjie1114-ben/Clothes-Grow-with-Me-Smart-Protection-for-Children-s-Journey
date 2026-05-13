@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Record List</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <main class="page">
+        <section class="panel">
+            <h1>Record List</h1>
+            <table id="recordTable">
+                <thead>
+                    <tr>
+                        <th>Alias</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Damage</th>
+                        <th>Score</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+    <script>
+        const statusValues = ["pending_review", "available", "reserved", "recycled", "discarded"];
+
+        async function loadRecords() {
+            const response = await fetch("/api/records");
+            const data = await response.json();
+            const tbody = document.querySelector("#recordTable tbody");
+            tbody.innerHTML = "";
+
+            data.records.forEach((record) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${record.child_alias}</td>
+                    <td>${record.cloth_type}</td>
+                    <td>${record.size}</td>
+                    <td>${record.damage_level}</td>
+                    <td>${record.damage_score}</td>
+                    <td></td>
+                `;
+
+                const select = document.createElement("select");
+                statusValues.forEach((status) => {
+                    const option = document.createElement("option");
+                    option.value = status;
+                    option.textContent = status;
+                    option.selected = record.status === status;
+                    select.appendChild(option);
+                });
+                select.addEventListener("change", async () => {
+                    await fetch(`/api/records/${record.id}/status`, {
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({status: select.value}),
+                    });
+                });
+
+                row.lastElementChild.appendChild(select);
+                tbody.appendChild(row);
+            });
+        }
+
+        loadRecords();
+    </script>
+</body>
+</html>

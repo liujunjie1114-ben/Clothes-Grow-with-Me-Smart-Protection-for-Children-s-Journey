@@ -18,10 +18,14 @@ env/
 *.sqlite
 *.sqlite3
 instance/
+data/database/*
+!data/database/.gitkeep
 
 # Uploaded images and generated files
 static/uploads/*
 !static/uploads/.gitkeep
+data/save_img/*
+!data/save_img/.gitkeep
 
 # OS and editor files
 .DS_Store
